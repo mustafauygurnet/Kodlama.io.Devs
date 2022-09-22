@@ -9,9 +9,9 @@ namespace Devs.Persistence;
 
 public static class PersistenceServiceRegistration
 {
-    public static IServiceCollection AddPersistenceServices(this IServiceCollection services)
+    public static IServiceCollection AddPersistenceServices(this IServiceCollection services,IConfiguration configuration)
     {
-        services.AddDbContext<BaseDbContext>();
+        services.AddDbContext<BaseDbContext>(options=> options.UseSqlServer(configuration.GetConnectionString("LanguageDbConnectionString")));
 
         services.AddScoped<ILanguageRepository, LanguageRepository>();
 

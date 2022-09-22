@@ -16,17 +16,17 @@ public class BaseDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        base.OnConfiguring(
-            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("LanguageDbString")));
+        //base.OnConfiguring(
+        //    optionsBuilder.UseSqlServer(Configuration.GetConnectionString("LanguageDbConnectionString")));
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Language>(x =>
+        modelBuilder.Entity<Language>(a =>
         {
-            x.ToTable("Languages").HasKey(k => k.Id);
-            x.Property(p => p.Id).HasColumnName("Id");
-            x.Property(p => p.Name).HasColumnName("Name");
+            a.ToTable("Languages").HasKey(k => k.Id);
+            a.Property(p => p.Id).HasColumnName("Id");
+            a.Property(p => p.Name).HasColumnName("Name");
         });
 
         Language[] languageSeeds =
