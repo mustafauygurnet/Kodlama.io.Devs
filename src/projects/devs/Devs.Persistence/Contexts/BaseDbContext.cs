@@ -8,6 +8,7 @@ public class BaseDbContext : DbContext
 {
     protected IConfiguration Configuration { get; set; }
     public DbSet<Language> Languages { get; set; }
+    public DbSet<Technology> Technologies { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
     {
@@ -27,6 +28,16 @@ public class BaseDbContext : DbContext
             a.ToTable("Languages").HasKey(k => k.Id);
             a.Property(p => p.Id).HasColumnName("Id");
             a.Property(p => p.Name).HasColumnName("Name");
+            a.HasMany(p=>p.Technologies);
+        });
+
+        modelBuilder.Entity<Technology>(a =>
+        {
+            a.ToTable("Technologies").HasKey(k => k.Id);
+            a.Property(p => p.Id).HasColumnName("Id");
+            a.Property(p => p.LanguageId).HasColumnName("LanguageId");
+            a.Property(p => p.Name).HasColumnName("Name");
+            a.HasOne(p => p.Language);
         });
 
         Language[] languageSeeds =
@@ -35,6 +46,16 @@ public class BaseDbContext : DbContext
             new(2, "Java")
         };
 
+        Technology[] technologySeeds =
+        {
+            new(1, 1, "ASP.NET"),
+            new(2, 1, "WPF"),
+            new(3, 2, "Spring"),
+        };
+
+
+
         modelBuilder.Entity<Language>().HasData(languageSeeds);
+        modelBuilder.Entity<Technology>().HasData(technologySeeds);
     }
 }
