@@ -23,7 +23,7 @@ public class UpdateLanguageCommandHandler : IRequestHandler<UpdateLanguageComman
 
     public async Task<UpdatedLanguageDto> Handle(UpdateLanguageCommand request, CancellationToken cancellationToken)
     {
-        await _languageBusinessRules.LanguageNameCanNotDuplicatedWhenUpdated(request.Name);
+        await _languageBusinessRules.LanguageNameCanNotDuplicatedWhenInserted(request.Name);
 
         Language mappedLanguage = _mapper.Map<Language>(request);
         Language language = await _languageRepository.UpdateAsync(mappedLanguage);

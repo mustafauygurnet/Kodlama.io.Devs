@@ -20,15 +20,15 @@ public class LanguageBusinessRules
         if (result.Items.Any()) throw new BusinessException("Language Name Exists");
     }
 
-    public async Task LanguageNameCanNotDuplicatedWhenUpdated(string languageName)
-    {
-        IPaginate<Language> result = await _languageRepository.GetListAsync(p => p.Name == languageName);
-        if (result.Items.Any()) throw new BusinessException("Language Name Exists");
-    }
-
     public async Task LanguageShouldExistsWhenRequested(int languageId)
     {
         Language? result = await _languageRepository.GetAsync(b=>b.Id == languageId);
         if (result is null) throw new BusinessException("Requested Language Does not Exists");
+    }
+
+    public async Task LanguageShouldNotExistsWhenRequested(int languageId)
+    {
+        Language? result = await _languageRepository.GetAsync(b => b.Id == languageId);
+        if (result is null) throw new BusinessException("Language not Registered");
     }
 }
