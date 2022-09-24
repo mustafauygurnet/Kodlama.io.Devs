@@ -1,4 +1,5 @@
-﻿using Devs.Domain.Entities;
+﻿using Core.Security.Entities;
+using Devs.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -9,6 +10,7 @@ public class BaseDbContext : DbContext
     protected IConfiguration Configuration { get; set; }
     public DbSet<Language> Languages { get; set; }
     public DbSet<Technology> Technologies { get; set; }
+    public DbSet<User> Users { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
     {
@@ -38,6 +40,18 @@ public class BaseDbContext : DbContext
             a.Property(p => p.LanguageId).HasColumnName("LanguageId");
             a.Property(p => p.Name).HasColumnName("Name");
             a.HasOne(p => p.Language);
+        });
+
+        modelBuilder.Entity<User>(a =>
+        {
+            a.ToTable("Users").HasKey(k => k.Id);
+            a.Property(p => p.Id).HasColumnName("Id");
+            a.Property(p => p.FirstName).HasColumnName("FirstName");
+            a.Property(p => p.LastName).HasColumnName("LastName");
+            a.Property(p => p.Email).HasColumnName("Email");
+            a.Property(p => p.PasswordHash).HasColumnName("PasswordHash");
+            a.Property(p => p.PasswordSalt).HasColumnName("PasswordSalt");
+            a.Property(p => p.Status).HasColumnName("Status");
         });
 
         Language[] languageSeeds =
