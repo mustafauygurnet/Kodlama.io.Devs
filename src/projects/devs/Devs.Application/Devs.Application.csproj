@@ -33,12 +33,12 @@
     <Folder Include="Features\Technologies\Queries\GetListTechnologyByDynamic\" />
     <Folder Include="Features\Technologies\Rules\" />
     <Folder Include="Features\Technologies\Profiles\" />
-    <Folder Include="Features\UserOperationClaims\Commands\" />
+    <Folder Include="Features\UserOperationClaims\Commands\CreateUserOperationClaim\" />
     <Folder Include="Features\UserOperationClaims\Constansts\" />
     <Folder Include="Features\UserOperationClaims\Dtos\" />
     <Folder Include="Features\UserOperationClaims\Models\" />
     <Folder Include="Features\UserOperationClaims\Profiles\" />
-    <Folder Include="Features\UserOperationClaims\Queries\" />
+    <Folder Include="Features\UserOperationClaims\Queries\GetByIdUserOperationClaim\" />
     <Folder Include="Features\UserOperationClaims\Rules\" />
     <Folder Include="Features\Users\Commands\CreateUser\" />
     <Folder Include="Features\Users\Commands\DeleteUser\" />
