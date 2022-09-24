@@ -11,6 +11,7 @@ public class BaseDbContext : DbContext
     public DbSet<Language> Languages { get; set; }
     public DbSet<Technology> Technologies { get; set; }
     public DbSet<User> Users { get; set; }
+    public DbSet<Developer> Developers { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
     {
@@ -71,6 +72,15 @@ public class BaseDbContext : DbContext
             a.Property(p => p.OperationClaimId).HasColumnName("OperationClaimId");
             a.HasOne(p=>p.User);
             a.HasOne(p=>p.OperationClaim);
+        });
+
+        modelBuilder.Entity<Developer>(a =>
+        {
+            a.ToTable("Developers").HasKey(k => k.Id);
+            a.Property(p => p.Id).HasColumnName("Id");
+            a.Property(p => p.UserId).HasColumnName("UserId");
+            a.Property(p => p.GithubAddress).HasColumnName("GithubAddress");
+            a.HasOne(p=>p.User);
         });
 
         Language[] languageSeeds =

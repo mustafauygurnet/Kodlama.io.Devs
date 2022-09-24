@@ -22,6 +22,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<ITokenHelper, JwtHelper>();
         services.AddScoped<IOperationClaimRepository, OperationClaimRepository>();
         services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
+        services.AddScoped<IDeveloperRepository, DeveloperRepository>();
 
         return services;
     }

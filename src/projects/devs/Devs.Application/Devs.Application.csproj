@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Developers\Commands\UpdateDeveloper\" />
+    <Folder Include="Features\Developers\Commands\DeleteDeveloper\" />
+    <Folder Include="Features\Developers\Commands\CreateDeveloper\" />
+    <Folder Include="Features\Developers\Constants\" />
+    <Folder Include="Features\Developers\Models\" />
+    <Folder Include="Features\Developers\Profiles\" />
+    <Folder Include="Features\Developers\Dtos\" />
+    <Folder Include="Features\Developers\Rules\" />
+    <Folder Include="Features\Developers\Queries\" />
     <Folder Include="Features\Languages\Commands\DeleteLanguage\" />
     <Folder Include="Features\Languages\Commands\UpdateLanguage\" />
     <Folder Include="Features\Languages\Rules\" />
