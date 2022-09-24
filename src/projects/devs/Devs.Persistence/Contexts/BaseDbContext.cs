@@ -52,6 +52,25 @@ public class BaseDbContext : DbContext
             a.Property(p => p.PasswordHash).HasColumnName("PasswordHash");
             a.Property(p => p.PasswordSalt).HasColumnName("PasswordSalt");
             a.Property(p => p.Status).HasColumnName("Status");
+            a.HasMany(p => p.UserOperationClaims);
+            a.HasMany(p => p.RefreshTokens);
+        });
+
+        modelBuilder.Entity<OperationClaim>(a =>
+        {
+            a.ToTable("OperationClaims").HasKey(k => k.Id);
+            a.Property(p => p.Id).HasColumnName("Id");
+            a.Property(p => p.Name).HasColumnName("Name");
+        });
+
+        modelBuilder.Entity<UserOperationClaim>(a =>
+        {
+            a.ToTable("UserOperationClaims").HasKey(k => k.Id);
+            a.Property(p => p.Id).HasColumnName("Id");
+            a.Property(p => p.UserId).HasColumnName("UserId");
+            a.Property(p => p.OperationClaimId).HasColumnName("OperationClaimId");
+            a.HasOne(p=>p.User);
+            a.HasOne(p=>p.OperationClaim);
         });
 
         Language[] languageSeeds =
@@ -67,9 +86,16 @@ public class BaseDbContext : DbContext
             new(3, 2, "Spring"),
         };
 
+        OperationClaim[] operationClaimSeeds =
+        {
+            new(1, "admin"),
+            new(2, "developer")
+        };
+
 
 
         modelBuilder.Entity<Language>().HasData(languageSeeds);
         modelBuilder.Entity<Technology>().HasData(technologySeeds);
+        modelBuilder.Entity<OperationClaim>().HasData(operationClaimSeeds);
     }
 }

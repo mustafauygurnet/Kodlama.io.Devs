@@ -1,7 +1,9 @@
 ﻿using System.Reflection;
 using Core.Application.Pipelines.Validation;
 using Devs.Application.Features.Languages.Rules;
+using Devs.Application.Features.OperationClaims.Rules;
 using Devs.Application.Features.Technologies.Rules;
+using Devs.Application.Features.UserOperationClaims.Rules;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +22,8 @@ public static class ApplicationServiceRegistration
 
         services.AddScoped<LanguageBusinessRules>();
         services.AddScoped<TechnologyBusinessRules>();
+        services.AddScoped<OperationClaimBusinessRules>();
+        services.AddScoped<UserOperationClaimBusinessRules>();
 
         return services;
     }
