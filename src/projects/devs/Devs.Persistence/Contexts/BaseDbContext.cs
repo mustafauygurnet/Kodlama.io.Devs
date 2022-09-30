@@ -12,6 +12,9 @@ public class BaseDbContext : DbContext
     public DbSet<Technology> Technologies { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Developer> Developers { get; set; }
+    public DbSet<OperationClaim> OperationClaims { get; set; }
+    public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+    public DbSet<RefreshToken> RefreshToken { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
     {
@@ -31,7 +34,7 @@ public class BaseDbContext : DbContext
             a.ToTable("Languages").HasKey(k => k.Id);
             a.Property(p => p.Id).HasColumnName("Id");
             a.Property(p => p.Name).HasColumnName("Name");
-            a.HasMany(p=>p.Technologies);
+            a.HasMany(p => p.Technologies);
         });
 
         modelBuilder.Entity<Technology>(a =>
@@ -70,8 +73,8 @@ public class BaseDbContext : DbContext
             a.Property(p => p.Id).HasColumnName("Id");
             a.Property(p => p.UserId).HasColumnName("UserId");
             a.Property(p => p.OperationClaimId).HasColumnName("OperationClaimId");
-            a.HasOne(p=>p.User);
-            a.HasOne(p=>p.OperationClaim);
+            a.HasOne(p => p.User);
+            a.HasOne(p => p.OperationClaim);
         });
 
         modelBuilder.Entity<Developer>(a =>
@@ -80,7 +83,7 @@ public class BaseDbContext : DbContext
             a.Property(p => p.Id).HasColumnName("Id");
             a.Property(p => p.UserId).HasColumnName("UserId");
             a.Property(p => p.GithubAddress).HasColumnName("GithubAddress");
-            a.HasOne(p=>p.User);
+            a.HasOne(p => p.User);
         });
 
         Language[] languageSeeds =
@@ -101,7 +104,6 @@ public class BaseDbContext : DbContext
             new(1, "admin"),
             new(2, "developer")
         };
-
 
 
         modelBuilder.Entity<Language>().HasData(languageSeeds);
