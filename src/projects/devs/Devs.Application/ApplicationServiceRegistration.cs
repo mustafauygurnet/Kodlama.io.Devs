@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Core.Application.Pipelines.Validation;
 using Devs.Application.Features.Auths.Rules;
+using Devs.Application.Features.Developers.Rules;
 using Devs.Application.Features.Languages.Rules;
 using Devs.Application.Features.OperationClaims.Rules;
 using Devs.Application.Features.Technologies.Rules;
@@ -24,6 +25,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<TechnologyBusinessRules>();
         services.AddScoped<AuthBusinessRules>();
         services.AddScoped<OperationClaimBusinessRules>();
+        services.AddScoped<DeveloperBusinessRules>();
 
         return services;
     }

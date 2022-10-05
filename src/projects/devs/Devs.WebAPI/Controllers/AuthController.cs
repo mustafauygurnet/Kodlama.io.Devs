@@ -36,11 +36,15 @@ namespace Devs.WebAPI.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> Login([FromBody] UserForLoginDto userForLoginDto)
         {
-            LoginCommand loginCommand = new();
-            loginCommand.UserForLoginDto = userForLoginDto;
+            LoginCommand loginCommand = new()
+            {
+                UserForLoginDto = userForLoginDto,
+                IpAddress = GetIpAddress()
+            };
+
             LoggedDto result = await Mediator.Send(loginCommand);
 
-            return Ok(result);
+            return Ok(result.AccessToken);
         }
     }
 }

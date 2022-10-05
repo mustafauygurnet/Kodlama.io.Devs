@@ -25,10 +25,13 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, LoggedDto>
         User user = await _authBusinessRules.EmailOrPasswordControlWhenLogged(request.UserForLoginDto.Email, request.UserForLoginDto.Password);
 
         AccessToken createdAccessToken = await _authService.CreateAccessToken(user);
+        RefreshToken createdRefreshToken = await _authService.CreateRefreshToken(user, request.IpAddress);
+        RefreshToken addedRefreshToken = await _authService.AddRefreshToken(createdRefreshToken);
 
         return new LoggedDto
         {
-            AccessToken = createdAccessToken
+            AccessToken = createdAccessToken,
+            RefreshToken = addedRefreshToken
         };
     }
 }
