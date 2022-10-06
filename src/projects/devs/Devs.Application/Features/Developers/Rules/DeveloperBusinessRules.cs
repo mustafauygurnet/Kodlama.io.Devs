@@ -28,8 +28,8 @@ public class DeveloperBusinessRules
 
     public async Task GithubAddressLimitControl(int userId)
     {
-        var result = await _developerRepository.GetListAsync(u=>u.UserId == userId);
-        if (result.Items.Count > 1)
+        var result = await _developerRepository.GetByIdClaimCount(userId);
+        if (result > 1)
         {
             throw new BusinessException("please add one github account ");
         }

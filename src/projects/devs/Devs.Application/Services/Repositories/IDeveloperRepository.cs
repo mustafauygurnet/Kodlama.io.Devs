@@ -5,5 +5,5 @@ namespace Devs.Application.Services.Repositories;
 
 public interface IDeveloperRepository : IAsyncRepository<Developer>, IRepository<Developer>
 {
-    
+    public Task<int> GetByIdClaimCount(int userId);
 }
