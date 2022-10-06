@@ -13,7 +13,7 @@ public class
 {
     private readonly IUserOperationClaimRepository _userOperationClaimRepository;
     private readonly IMapper _mapper;
-    private UserOperationClaimBusinessRules _userOperationClaimBusinessRules;
+    private readonly UserOperationClaimBusinessRules _userOperationClaimBusinessRules;
 
     public DeleteUserOperationClaimCommandHandler(IUserOperationClaimRepository userOperationClaimRepository,
         IMapper mapper, UserOperationClaimBusinessRules userOperationClaimBusinessRules)
@@ -26,6 +26,8 @@ public class
     public async Task<DeletedUserOperationClaimDto> Handle(DeleteUserOperationClaimCommand request,
         CancellationToken cancellationToken)
     {
+        await _userOperationClaimBusinessRules.AuthorizedCheck();
+        
         UserOperationClaim mappedOperationClaim = _mapper.Map<UserOperationClaim>(request);
         UserOperationClaim deletedUserOperationClaim =
             await _userOperationClaimRepository.DeleteAsync(mappedOperationClaim);

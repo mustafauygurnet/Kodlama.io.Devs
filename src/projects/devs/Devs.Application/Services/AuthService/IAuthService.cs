@@ -8,4 +8,5 @@ public interface IAuthService
     Task<AccessToken> CreateAccessToken(User user);
     public Task<RefreshToken> CreateRefreshToken(User user, string ipAddress);
     public Task<RefreshToken> AddRefreshToken(RefreshToken refreshToken);
+    Task<IList<OperationClaim>> FindOperationClaims(int userId);
 }

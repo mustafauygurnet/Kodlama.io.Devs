@@ -21,22 +21,29 @@ public class AuthManager : IAuthService
 
     public async Task<AccessToken> CreateAccessToken(User user)
     {
-        var userClaims = await
-            _userOperationClaimRepository.GetListAsync
-            (predicate: u => u.UserId == user.Id,
-                include: u => u.Include(c => c.OperationClaim)
-            );
-        
-        IList<OperationClaim> operationClaims =
-            userClaims.Items.Select(u => new OperationClaim
-                { Id = u.OperationClaim.Id, 
-                    Name = u.OperationClaim.Name 
-                }).ToList();
+        IList<OperationClaim> operationClaims = await FindOperationClaims(user.Id);
 
-        AccessToken createdAccessToken = _tokenHelper.CreateToken(user,operationClaims);
+        AccessToken createdAccessToken = _tokenHelper.CreateToken(user, operationClaims);
 
         return createdAccessToken;
+    }
 
+    public async Task<IList<OperationClaim>> FindOperationClaims(int userId)
+    {
+        var userClaims = await
+            _userOperationClaimRepository.GetListAsync
+            (predicate: u => u.UserId == userId,
+                include: u => u.Include(c => c.OperationClaim)
+            );
+
+        IList<OperationClaim> operationClaims =
+            userClaims.Items.Select(u => new OperationClaim
+            {
+                Id = u.OperationClaim.Id,
+                Name = u.OperationClaim.Name
+            }).ToList();
+
+        return operationClaims;
     }
 
     public async Task<RefreshToken> CreateRefreshToken(User user, string ipAddress)
