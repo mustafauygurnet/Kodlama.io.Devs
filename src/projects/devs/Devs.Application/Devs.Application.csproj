@@ -45,6 +45,9 @@
     <Folder Include="Features\Technologies\Queries\GetListTechnologyByDynamic\" />
     <Folder Include="Features\Technologies\Rules\" />
     <Folder Include="Features\Technologies\Profiles\" />
+    <Folder Include="Features\UserOperationClaims\Constants" />
+    <Folder Include="Features\UserOperationClaims\Profiles" />
+    <Folder Include="Features\UserOperationClaims\Queries" />
   </ItemGroup>
 
 	<ItemGroup>

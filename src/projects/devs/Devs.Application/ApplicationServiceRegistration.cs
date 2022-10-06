@@ -5,6 +5,7 @@ using Devs.Application.Features.Developers.Rules;
 using Devs.Application.Features.Languages.Rules;
 using Devs.Application.Features.OperationClaims.Rules;
 using Devs.Application.Features.Technologies.Rules;
+using Devs.Application.Features.UserOperationClaims.Rules;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +27,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<AuthBusinessRules>();
         services.AddScoped<OperationClaimBusinessRules>();
         services.AddScoped<DeveloperBusinessRules>();
+        services.AddScoped<UserOperationClaimBusinessRules>();
 
         return services;
     }
