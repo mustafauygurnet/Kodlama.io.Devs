@@ -40,6 +40,6 @@ public class UserOperationClaimBusinessRules
             }
         }
 
-        throw new BusinessException("you are not authorized");
+        throw new AuthorizationException("you are not authorized");
     }
 }

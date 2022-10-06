@@ -1,6 +1,7 @@
 ﻿using Core.Security.JWT;
 using Devs.Application.Services.AuthService;
 using Devs.Application.Services.Repositories;
+using Devs.Application.Services.UserService;
 using Devs.Persistence.Contexts;
 using Devs.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
         services.AddScoped<IDeveloperRepository, DeveloperRepository>();
         services.AddScoped<IAuthService, AuthManager>();
+        services.AddScoped<IUserService, UserManager>();
         services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 
         return services;

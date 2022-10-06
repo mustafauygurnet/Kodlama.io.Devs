@@ -47,7 +47,6 @@
     <Folder Include="Features\Technologies\Profiles\" />
     <Folder Include="Features\UserOperationClaims\Constants" />
     <Folder Include="Features\UserOperationClaims\Profiles" />
-    <Folder Include="Features\UserOperationClaims\Queries" />
   </ItemGroup>
 
 	<ItemGroup>
